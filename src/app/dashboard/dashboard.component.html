@@ -2,8 +2,9 @@
 <div class="grid grid-pad">
   <a *ngFor="let employee of employees" [routerLink]="['/employees/'+employee.id]" class="col-1-4">
     <div class="module employee">
+      <small>{{employee.role | uppercase }}</small>
       <h4>{{employee.name}}</h4>
-      <small>{{employee.salary}}</small>
+      <span>Salary: <small>{{employee.salary | currency:'INR'}}</small></span>
     </div>
   </a>
 </div>

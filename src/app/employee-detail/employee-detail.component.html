@@ -2,6 +2,10 @@
   <h2>{{employee.name | uppercase}} Details</h2>
   <div class="detail">
     <span>Recognize: </span>{{employee.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}<br/>
+    <span>Email: </span>{{employee.email}}<br/>
+    <span>Rating: </span>{{employee.rating}}<br/>
+    <span>Salary: </span>{{employee.salary | currency:'INR'}}<br/>
+    <span>Role: </span>{{employee.role | uppercase}}<br/>
   </div>
   <div>
     <label>name:
