@@ -1,0 +1,25 @@
+<h2>My Heroes</h2>
+
+<div>
+  <label class="create-employee">Hero name:
+    <input #employeeName />
+  </label>
+  <button (click)="add(employeeName.value); employeeName.value=''">
+    add
+  </button>
+</div>
+
+<ul class="employees">
+  <li *ngFor="let employee of employees; index as i">
+    <span class="handle ui-sortable-handle">
+      <i class="fa fa-ellipsis-v"></i>
+      <i class="fa fa-ellipsis-v"></i>
+    </span>
+    <span class="text">{{employee.name}}</span>
+    <div class="tools">
+      <button class="delete danger" title="delete employee"
+        (click)="delete(employee)">x</button>
+      <button class="primary" routerLink="/employees/{{employee.id}}">view</button>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,13 @@
+<div *ngIf="employee">
+  <h2>{{employee.name | uppercase}} Details</h2>
+  <div class="detail">
+    <span>Recognize: </span>{{employee.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}<br/>
+  </div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="employee.name" placeholder="name"/>
+    </label>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div> 

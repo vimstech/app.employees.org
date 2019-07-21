@@ -1,0 +1,11 @@
+<h3>Top Employees</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let employee of employees" [routerLink]="['/employees/'+employee.id]" class="col-1-4">
+    <div class="module employee">
+      <h4>{{employee.name}}</h4>
+      <small>{{employee.salary}}</small>
+    </div>
+  </a>
+</div>
+
+<org-employee-search></org-employee-search>
