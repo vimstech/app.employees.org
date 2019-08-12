@@ -1,17 +1,32 @@
-<div *ngIf="employee">
-  <h2>{{employee.name | uppercase}} Details</h2>
-  <div class="detail">
-    <span>Recognize: </span>{{employee.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}<br/>
-    <span>Email: </span>{{employee.email}}<br/>
-    <span>Rating: </span>{{employee.rating}}<br/>
-    <span>Salary: </span>{{employee.salary | currency:'INR'}}<br/>
-    <span>Role: </span>{{employee.role | uppercase}}<br/>
+<div class="clr"></div>
+<div class="employee" *ngIf="employee">
+  <div class="left">
+    <h2>
+      {{employee.name | uppercase}} Details
+      <p *ngIf="employee.reporter">
+        <small>Reports to</small>: <b>{{employee.reporter.name}}</b>
+      </p>
+    </h2>
+    <div class="detail">
+      <span>Recognize: </span>{{employee.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}<br/>
+      <span>Email: </span>{{employee.email}}<br/>
+      <span>Rating: </span>{{employee.rating}}<br/>
+      <span>Salary: </span>{{employee.salary | currency:'INR'}}<br/>
+      <span>Role: </span>{{employee.role | uppercase}}<br/>
+      <span>Name: {{employee.name}}</span>
+    </div>
   </div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="employee.name" placeholder="name"/>
-    </label>
+  <div class="right" *ngIf="employee.role !== 'sde'">
+    <h2>Reportees</h2>
+    <ul>
+      <li *ngFor="let reporter of employee.reportees">
+        <a href="javascript:void(0)">{{reporter.name}} <small>({{reporter.role}})</small></a>
+      </li>
+    </ul>
+    <org-employee-search (employeeSelected)="onEmployeeSelected($event)"></org-employee-search>
   </div>
+</div>
+<div class="control">
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
-</div> 
+</div>

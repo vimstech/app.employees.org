@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmployeeService } from '../employee.service';
-import { Employee} from '../employee';
+import { EmployeeService } from '../services/employee.service';
+import { Employee} from '../models/employee';
 
 @Component({
   selector: 'org-employee-detail',
@@ -28,9 +28,19 @@ export class EmployeeDetailComponent implements OnInit {
 
     this.employeeService.getEmployee(id).subscribe(employee => {
       this.employee = employee;
+      console.log(employee)
+      if(this.employee.role !== 'sde'){
+        this.employeeService.getReportees(employee.id).subscribe(reportees => {
+          this.employee.reportees = reportees;
+        })
+      }
     });
   }
 
+  onEmployeeSelected (employee: Employee) {
+    employee.parent_id = this.employee.id;
+    this.employeeService.updateEmployee(employee).subscribe(_ => this.getEmployee())
+  }
   save () {
     this.employeeService.updateEmployee(this.employee)
       .subscribe(() => this.goBack());

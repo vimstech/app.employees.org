@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../employee.service';
-import { Employee } from '../employee';
+import { EmployeeService } from '../services/employee.service';
+import { Employee } from '../models/employee';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'org-dashboard',
@@ -9,7 +10,10 @@ import { Employee } from '../employee';
 })
 export class DashboardComponent implements OnInit {
   employees: Employee[] = [];
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getEmployees();
@@ -19,5 +23,8 @@ export class DashboardComponent implements OnInit {
     this.employeeService.getTopEmployees().subscribe((employees) => {
       this.employees = employees;
     });
+  }
+  onEmployeeSelected($event) {
+    this.router.navigate(['employees', $event.id])
   }
 }

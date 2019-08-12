@@ -1,0 +1,43 @@
+<div class="employee-form" [ngClass]="{open: odOpenDialog}">
+  <div class="form">
+    <div class="header">Create Employee</div>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <br/>
+      <label>
+        Name:
+        <input type="text" formControlName="name" placeholder="John">
+      </label>
+      <br/>
+      <label>
+        Email:
+        <input type="email" formControlName="email" placeholder="john@employee.org">
+      </label>
+      <br/>
+      <label>
+        Moble:
+        <input type="text" formControlName="mobile" placeholder="+91 8904549026">
+      </label>
+      <br/>
+      <label>
+        Salary:
+        <input type="text" formControlName="salary" placeholder="25000">
+      </label>
+      <br/>
+      <label>
+        Ratings:
+        <input type="number" max="5" min="1" formControlName="rating" placeholder="1">
+      </label>
+      <br/>
+      <label>
+        Role:
+        <select formControlName="role">
+          <option value="">Select Role</option>
+          <option *ngFor="let role of roles" [value]="role">{{role|uppercase}}</option>
+        </select>
+      </label>
+      <br/>
+      <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
+      <button type="button" (click)="openDialog=false">Cancel</button>
+    </form>
+  </div>
+</div>

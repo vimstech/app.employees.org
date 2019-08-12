@@ -1,0 +1,43 @@
+label.create-employee, form > label {
+  input, select{
+    padding: 5px 8px;
+    min-width: 250px;
+  }
+}
+
+.employee-form {
+  text-align: center;
+  position: absolute;
+  z-index: 30;
+  background-color: #ccc;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  &.open{
+    display: flex;
+  }
+  .header{
+    padding: 10px;
+    border-bottom: 1px solid #F3F3F3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .form{
+    background-color: #FFFFFF;
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    form {
+      br{
+        line-height: 2.5;
+      }
+    }
+  }
+}

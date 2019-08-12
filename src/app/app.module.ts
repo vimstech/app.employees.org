@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,8 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeSearchComponent } from './employee-search/employee-search.component';
-
+import { PaginationComponent } from './pagination/pagination.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +19,16 @@ import { EmployeeSearchComponent } from './employee-search/employee-search.compo
     EmployeeDetailComponent,
     MessageComponent,
     DashboardComponent,
-    EmployeeSearchComponent
+    EmployeeSearchComponent,
+    PaginationComponent,
+    CreateEmployeeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

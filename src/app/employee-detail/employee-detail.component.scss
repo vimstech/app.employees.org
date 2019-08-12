@@ -1,4 +1,25 @@
-/* HeroDetailComponent's private CSS styles */
+.employee {
+  display: flex;
+  .left, .right {
+    width: 50%;
+  }
+  .right{
+    ul{
+      list-style: none;
+      li{
+        padding: 5px;
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .control{
+    width: 100%;
+    display: block;
+  }
+}
+
 label {
   display: inline-block;
   width: 3em;
@@ -10,12 +31,6 @@ input {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
-}
-input.ability{
-  height: 1.5em;
-  width: 5em;
-  font-size: 0.6em;
-  padding: 0.1em;
 }
 button {
   margin: 5px;
@@ -42,3 +57,6 @@ div.detail {
     color: rgba(61, 63, 63, 0.541);  
   }
 }
+.from form br{
+  line-height: 1px !important;
+} 

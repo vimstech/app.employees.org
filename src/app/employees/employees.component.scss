@@ -1,104 +1,38 @@
-/* HeroesComponent's private CSS styles */
-
-.employees {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 300px;
-  margin-left: 15px;
-}
-
-.employees>li {
-  border-radius: 2px;
+.table{
   padding: 10px;
-  background: #f4f4f4;
-  margin: 5px;
-  border-left: 2px solid #e6e7e8;
-  color: #444
 }
-
-.employees>li:last-of-type {
-  margin-bottom: 0
-}
-
-.employees>li .text {
-  display: inline-block;
-  margin-left: 5px;
-  font-weight: 600
-}
-
-.employees>li .label {
-  margin-left: 10px;
-  font-size: 9px
-}
-
-.employees>li .tools {
-  display: none;
-  float: right;
-  color: #dd4b39;
-  margin-top: -5px;
-  margin-right: -5px;
-}
-
-.employees>li .tools>.fa,.employees>li .tools>.glyphicon,.employees>li .tools>.ion {
-  margin-right: 5px;
-  cursor: pointer
-}
-
-.employees>li:hover .tools {
-  display: inline-block
-}
-
-.employees>li.done {
-  color: #999
-}
-
-.employees>li.done .text {
-  text-decoration: line-through;
-  font-weight: 500
-}
-
-.employees>li.done .label {
-  background: #d2d6de !important
-}
-
-.employees .danger {
-  border-left-color: #dd4b39
-}
-
-.employees .warning {
-  border-left-color: #f39c12
-}
-
-.employees .info {
-  border-left-color: #00c0ef
-}
-
-.employees .success {
-  border-left-color: #00a65a
-}
-
-.employees .primary {
-  border-left-color: #3c8dbc
-}
-
-.employees .handle {
-  display: inline-block;
-  cursor: move;
-  margin: 0 5px
-}
-
-button:hover {
-  background-color: #cfd8dc;
-}
-
-label.create-employee{
-  input{
-    padding: 5px 8px;
+table {
+  width: 100%;
+  border-spacing: 0px;
+  border: 1px solid #000000;
+  border-top: none;
+  caption {
+    padding: 10px;
+    background-color: #444444;
+    font-weight: 600;
+    color: #FFFFFF;
+    border: 1px solid #000000;
   }
-}
-
-label + button{
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  thead {
+    background-color: #444;
+    padding: 10px;
+    text-align: left;
+    tr {
+      th {
+        padding: 10px;
+      }
+    }
+  }
+  tbody{
+    background-color: #999;
+    padding: 10px;
+    tr:nth-child(even) {
+      background-color: #e6e7e8;
+    }
+    tr {
+      td {
+        padding: 10px;
+      }
+    }
+  }
 }

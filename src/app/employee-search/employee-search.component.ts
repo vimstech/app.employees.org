@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../employee.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { EmployeeService } from '../services/employee.service';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Employee } from '../employee';
+import { Employee } from '../models/employee';
 
 @Component({
   selector: 'org-employee-search',
@@ -12,6 +12,8 @@ import { Employee } from '../employee';
 export class EmployeeSearchComponent implements OnInit {
   private employees$: Observable<Employee[]>;
   private searchTerms = new Subject<string>();
+
+  @Output() employeeSelected = new  EventEmitter<Employee>();
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -24,5 +26,9 @@ export class EmployeeSearchComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.employeeService.searchEmployees(term))
     );
+  }
+  onSelect(employee: Employee) {
+    this.employeeSelected.emit(employee);
+    this.searchTerms.next('');
   }
 }

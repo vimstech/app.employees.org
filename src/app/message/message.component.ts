@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
-  selector: 'sq-message',
+  selector: 'org-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })

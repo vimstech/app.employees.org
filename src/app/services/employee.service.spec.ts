@@ -2,7 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { EmployeeService } from './employee.service';
-import { Employee } from './employee';
+import { Employee } from '../models/employee';
 
 describe('EmployeeService', () => {
   // beforeEach(() => TestBed.configureTestingModule({}));

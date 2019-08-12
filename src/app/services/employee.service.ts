@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of} from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
-import { Employee } from './employee';
+import { Employee } from '../models/employee';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -18,6 +18,14 @@ export class EmployeeService {
     private http: HttpClient
   ) { }
 
+  findOne (id: string = null): Observable<Employee> {
+    if(id){
+      return this.getEmployee(id);
+    }else {
+      return of(new Employee())
+    }
+  }
+
   getTopEmployees (): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.baseUrl}/top`, {}).pipe(
       tap(_ => this.log('fetched employees')),
@@ -25,13 +33,16 @@ export class EmployeeService {
     );
   }
 
-  getEmployees (params: any = {}): Observable<Employee[]> {
+  getEmployees (params: any = {}): Observable<any> {
     params['page'] = params['page'] || 1
     params['per'] = params['per'] || 10
-    return this.http.get<Employee[]>(this.baseUrl, { params: params }).pipe(
-      tap(_ => this.log('fetched employees')),
-      catchError(this.handleError('getEmployees', []))
-    );
+    params['order[salary]']='desc'
+    return this.http.get<any>(this.baseUrl, { params: params, observe: 'response', responseType: 'json' })
+  }
+
+  getReportees (reporterId: any): Observable<Employee[]> {
+    let query = `query_options[parent_id]=${reporterId}`;
+    return this.http.get<Employee[]>(`${this.baseUrl}?${query}`,{});
   }
 
   searchEmployees (term: string): Observable<Employee[]> {
@@ -42,8 +53,8 @@ export class EmployeeService {
     }
     params['page'] = 1;
     params['per'] = 10;
-    let search = `search[name]=${term}`;
-    return this.http.get<Employee[]>(`${this.baseUrl}?${search}`, { params: params }).pipe(
+    let search = term ? `search=${term}` : '';
+    return this.http.get<Employee[]>(`${this.baseUrl}/search?${search}`, { params: params }).pipe(
       tap(_ => this.log('search employees')),
       catchError(this.handleError('searchEmployees', []))
     );
@@ -57,7 +68,7 @@ export class EmployeeService {
   }
 
   getEmployee (id: string): Observable<Employee> {
-    return this.http.get<Employee>(this.baseUrl + `/${id}`).pipe(
+    return this.http.get<Employee>(this.baseUrl + `/${id}?include[]=reporter`).pipe(
       tap(_ => this.log(`Fetched employee id=${id}`)),
       catchError(this.handleError<Employee>(`getEmployee id=${id}`))
     );
@@ -68,6 +79,14 @@ export class EmployeeService {
       tap(_ => this.log(`Update employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
     );
+  }
+
+  save(employee: Employee): Observable<any> {
+    if(employee.id){
+      return this.updateEmployee(employee);
+    } else {
+      return this.addEmployee(employee);
+    }
   }
 
   deleteEmployee(employeeId: string): Observable<any> {

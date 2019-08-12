@@ -1,0 +1,36 @@
+ul{
+  display: flex;
+  padding: 10px;
+
+  li {
+    list-style: none;
+    &.disabled {
+      pointer-events: none;
+      a{
+        cursor: move;
+      }
+    }
+    &.active {
+      a::before{
+        content: "["
+      }
+      a::after{
+        content: "]"
+      }
+    }
+    a {
+      padding: 5px 5px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      margin: 0px 5px;
+      color: black;
+      cursor: pointer;
+      &:visited {
+        color: black;
+      }
+      &:hover{
+        color: black;
+      }
+    }
+  }
+}

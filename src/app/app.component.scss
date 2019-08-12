@@ -9,6 +9,13 @@ h2 {
   margin-top: 0;
   padding-top: 0;
 }
+nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #444;
+  width: 100%;
+}
 nav a {
   padding: 5px 10px;
   text-decoration: none;

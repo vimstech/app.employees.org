@@ -1,25 +1,50 @@
-<h2>My Heroes</h2>
-
-<div>
-  <label class="create-employee">Hero name:
-    <input #employeeName />
-  </label>
-  <button (click)="add(employeeName.value); employeeName.value=''">
-    add
-  </button>
+<div class="clr"></div>
+<div class="table">
+  <button type="button" (click)="openDialog=true">Add Employee</button>
+  <table>
+    <caption>Employees List</caption>
+    <thead>
+      <tr>
+        <th>Sr.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Salary</th>
+        <th>Rating</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employeeList.employees; index as i">
+        <td>{{i + 1}}</td>
+        <td>
+          <a routerLink="/employees/{{employee.id}}">
+            {{employee.name}}
+          </a>
+        </td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.mobile}}</td>
+        <td>{{employee.salary}}</td>
+        <td>{{employee.rating}}</td>
+        <td>{{employee.role}}</td>
+        <td>
+          <a href="javascript:void(0)" (click)="editEmployee(employee)">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7" *ngIf="employeeList.pagination">
+          <app-pagination (pageChanged)="onPageChange($event)" [pagination]="employeeList.pagination"></app-pagination>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 </div>
-
-<ul class="employees">
-  <li *ngFor="let employee of employees; index as i">
-    <span class="handle ui-sortable-handle">
-      <i class="fa fa-ellipsis-v"></i>
-      <i class="fa fa-ellipsis-v"></i>
-    </span>
-    <span class="text">{{employee.name}}</span>
-    <div class="tools">
-      <button class="delete danger" title="delete employee"
-        (click)="delete(employee)">x</button>
-      <button class="primary" routerLink="/employees/{{employee.id}}">view</button>
-    </div>
-  </li>
-</ul>
+<org-create-employee
+  [openDialog]="openDialog"
+  [employeeId]="selectedEmployeeId"
+  (employeeCreated)="onEmployeeCreated($event)"
+  (employeeUpdated)="onEmployeeUpdated($event)"
+></org-create-employee>

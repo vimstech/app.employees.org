@@ -1,11 +1,11 @@
 <div id="search-component">
-  <h4>Hero Search</h4>
+  <h4>Employee Search</h4>
 
   <input #searchBox id="search-box" (input)="search(searchBox.value)" />
 
   <ul class="search-result">
     <li *ngFor="let employee of employees$ | async" >
-      <a routerLink="/employees/{{employee.id}}">
+      <a href="javascript:void(0)" (click)="onSelect(employee)">
         {{employee.name}}
       </a>
     </li>
