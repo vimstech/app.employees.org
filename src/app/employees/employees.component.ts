@@ -43,6 +43,10 @@ export class EmployeesComponent implements OnInit {
 
   editEmployee(employee: Employee) {
     this.selectedEmployeeId = employee.id;
-    this.editSelectedEmployee.emit(employee);
+    this.openDialog = true;
+  }
+  onDialogClosed(status: boolean){
+    this.selectedEmployeeId = null;
+    this.openDialog = false;
   }
 }

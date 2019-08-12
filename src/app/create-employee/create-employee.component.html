@@ -1,4 +1,4 @@
-<div class="employee-form" [ngClass]="{open: odOpenDialog}">
+<div class="employee-form" [ngClass]="{open: doOpenDialog}">
   <div class="form">
     <div class="header">Create Employee</div>
     <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
@@ -31,13 +31,13 @@
       <label>
         Role:
         <select formControlName="role">
-          <option value="">Select Role</option>
+          <option value="" selected>Select Role</option>
           <option *ngFor="let role of roles" [value]="role">{{role|uppercase}}</option>
         </select>
       </label>
       <br/>
       <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
-      <button type="button" (click)="openDialog=false">Cancel</button>
+      <button type="button" (click)="closeDialog()">Cancel</button>
     </form>
   </div>
 </div>

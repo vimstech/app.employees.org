@@ -13,14 +13,13 @@ export class CreateEmployeeComponent implements OnInit {
   @Input() employeeId: string;
   @Input()
   set openDialog(openDialog: boolean){
-    console.log(openDialog)
     this.findEmployee(openDialog)
   }
   get openDialog(){
     return this.doOpenDialog;
   }
   @Output() employeeCreated = new EventEmitter<Employee>();
-
+  @Output() dialogClosed = new EventEmitter<boolean>();
   roles: Array<string> = [];
   employeeForm: FormGroup
   constructor(private employeeService: EmployeeService) {
@@ -32,7 +31,6 @@ export class CreateEmployeeComponent implements OnInit {
   findEmployee (openDialog: boolean) {
     this.employeeService.findOne(this.employeeId).subscribe((employee: Employee) => {
       this.employeeForm = new FormGroup({
-        id: new FormControl(employee.id),
         name: new FormControl(employee.name, Validators.required),
         email: new FormControl(employee.email, Validators.email),
         salary: new FormControl(employee.salary, Validators.required),
@@ -48,5 +46,8 @@ export class CreateEmployeeComponent implements OnInit {
       this.openDialog = false;
       this.employeeCreated.emit(employee);
     });
+  }
+  closeDialog(){
+    this.dialogClosed.emit(true);
   }
 }
